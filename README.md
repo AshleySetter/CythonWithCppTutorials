@@ -14,3 +14,8 @@ In SumNumpyArray I have implemented a function to sum an array of double precisi
 | numpy np.sum()        | 0.038284         |
 | C++ sum               | 0.108173         |
 | C++ sum with OpenMP   | 0.042143         |
+
+In ClassCythonCPP I have implemented a simple class in C++ and wrapped it in cython such that you may create an instance in python of this class.
+
+In ClassCythoncppWithMemberFunctions I have extended this simple class to take a numpy array in the constructor and convert it to a C array stored in the object. I have then added a member function to the class which sums the elements in this list and returns a double containing this sum total. The returned number may be accessed from Python.
+
