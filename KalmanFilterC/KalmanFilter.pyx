@@ -11,6 +11,7 @@ cdef extern from "KalmanFilterC.cpp":
 
 cdef class CKalmanFilter:
     cdef KalmanFilter* thisptr # hold a C++ instance
+    
     def __cinit__(self, int Dimensionality, np.ndarray[double, ndim=2, mode="c"] AMatrix not None, np.ndarray[double, ndim=2, mode="c"] PMatrix not None, np.ndarray[double, ndim=2, mode="c"] QMatrix not None, np.ndarray[double, ndim=1, mode="c"] HVector not None, np.ndarray[double, ndim=1, mode="c"] X_InitVector not None, double RValue):
         cdef double[::1] AMatrixCFlattened = AMatrix.flatten()
         cdef double[::1] PMatrixCFlattened = PMatrix.flatten()
@@ -18,8 +19,10 @@ cdef class CKalmanFilter:
         cdef double[::1] HVectorC = HVector
         cdef double[::1] X_InitVectorC = X_InitVector 
         self.thisptr = new KalmanFilter(Dimensionality, &AMatrixCFlattened[0], &PMatrixCFlattened[0], &QMatrixCFlattened[0], &HVectorC[0], &X_InitVectorC[0], RValue)
+
     def __dealloc__(self):
         del self.thisptr
+
     def FilterData(self, np.ndarray[double, ndim=1, mode="c"] Data not None, int Length):
         cdef double[::1] DataC = Data
         cdef double[::1] FilteredDataResult = np.zeros(Length)
