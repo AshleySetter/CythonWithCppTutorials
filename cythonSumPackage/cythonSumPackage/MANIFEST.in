@@ -1,0 +1,2 @@
+include cythonSumPackage/SumArrayCython/SumArray.c
+include cythonSumPackage/SumArrayCython/SumArray.pyx
