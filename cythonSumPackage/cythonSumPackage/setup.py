@@ -4,8 +4,9 @@ import numpy
 
 extensions = [
     Extension(
-    name="SumArrayCython",
-    sources=["cythonSumPackage/SumArrayCython/SumArray.c"],)
+    name="cythonSumPackage.SumArray",
+    sources=["cythonSumPackage/SumArrayCython/SumArray.c"],
+    include_dirs = [numpy.get_include()])
 ]
 
 setup(name='cythonSumPackage',
